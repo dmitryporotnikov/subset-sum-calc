@@ -14,3 +14,5 @@ A Windows Forms application designed to solve the SUBSET-SUM problem. Users can 
 1. Input a series of space-separated numbers in the 'Input' textbox.
 2. Specify the target sum in the designated textbox.
 3. Click 'Calculate' to view all combinations that match the target sum in the 'Output' textbox.
+   
+![Screenshot of Subset-Sum Calc](./SUBSET-SUM-CALC/Resources/screenshot.png)
