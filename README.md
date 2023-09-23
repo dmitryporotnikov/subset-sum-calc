@@ -14,5 +14,3 @@ A Windows Forms application designed to solve the SUBSET-SUM problem. Users can 
 1. Input a series of space-separated numbers in the 'Input' textbox.
 2. Specify the target sum in the designated textbox.
 3. Click 'Calculate' to view all combinations that match the target sum in the 'Output' textbox.
-
-?descriptionFromFileType=function+toLocaleUpperCase()+{+[native+code]+}+File&mimeType=application/octet-stream&fileName=Subset-Sum+Solver+Tool.md&fileType=undefined&fileExtension=md
