@@ -29,94 +29,124 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            Input = new System.Windows.Forms.RichTextBox();
-            Output = new System.Windows.Forms.RichTextBox();
-            Calculate = new System.Windows.Forms.Button();
-            ValueToSearch = new System.Windows.Forms.TextBox();
-            lbl_value = new System.Windows.Forms.Label();
-            lbl_input = new System.Windows.Forms.Label();
-            this.SuspendLayout();
+            Input = new RichTextBox();
+            Output = new RichTextBox();
+            Calculate_btn = new Button();
+            ValueToSearch = new TextBox();
+            lbl_value = new Label();
+            lbl_input = new Label();
+            Stop_btn = new Button();
+            progressBar = new ProgressBar();
+            SuspendLayout();
             // 
             // Input
             // 
-            Input.Location = new System.Drawing.Point(12, 30);
+            Input.Location = new Point(17, 50);
+            Input.Margin = new Padding(4, 5, 4, 5);
             Input.Name = "Input";
-            Input.Size = new System.Drawing.Size(727, 166);
+            Input.Size = new Size(1037, 194);
             Input.TabIndex = 0;
             Input.Text = "";
             // 
             // Output
             // 
-            Output.Location = new System.Drawing.Point(12, 231);
+            Output.Location = new Point(17, 303);
+            Output.Margin = new Padding(4, 5, 4, 5);
             Output.Name = "Output";
-            Output.Size = new System.Drawing.Size(727, 187);
+            Output.Size = new Size(1037, 369);
             Output.TabIndex = 1;
             Output.Text = "";
             // 
-            // Calculate
+            // Calculate_btn
             // 
-            Calculate.Location = new System.Drawing.Point(583, 202);
-            Calculate.Name = "Calculate";
-            Calculate.Size = new System.Drawing.Size(153, 23);
-            Calculate.TabIndex = 2;
-            Calculate.Text = "Calculate";
-            Calculate.UseVisualStyleBackColor = true;
-            Calculate.Click += this.Calculate_Click;
+            Calculate_btn.Location = new Point(709, 254);
+            Calculate_btn.Margin = new Padding(4, 5, 4, 5);
+            Calculate_btn.Name = "Calculate_btn";
+            Calculate_btn.Size = new Size(170, 38);
+            Calculate_btn.TabIndex = 2;
+            Calculate_btn.Text = "Calculate";
+            Calculate_btn.UseVisualStyleBackColor = true;
+            Calculate_btn.Click += Calculate_Click;
             // 
             // ValueToSearch
             // 
-            ValueToSearch.Location = new System.Drawing.Point(191, 203);
+            ValueToSearch.Location = new Point(269, 258);
+            ValueToSearch.Margin = new Padding(4, 5, 4, 5);
             ValueToSearch.Name = "ValueToSearch";
-            ValueToSearch.Size = new System.Drawing.Size(338, 23);
+            ValueToSearch.Size = new Size(397, 31);
             ValueToSearch.TabIndex = 3;
             // 
             // lbl_value
             // 
             lbl_value.AutoSize = true;
-            lbl_value.Location = new System.Drawing.Point(12, 206);
+            lbl_value.Location = new Point(13, 263);
+            lbl_value.Margin = new Padding(4, 0, 4, 0);
             lbl_value.Name = "lbl_value";
-            lbl_value.Size = new System.Drawing.Size(141, 15);
+            lbl_value.Size = new Size(215, 25);
             lbl_value.TabIndex = 4;
             lbl_value.Text = "Value you are looking for:";
             // 
             // lbl_input
             // 
             lbl_input.AutoSize = true;
-            lbl_input.Location = new System.Drawing.Point(12, 9);
+            lbl_input.Location = new Point(17, 15);
+            lbl_input.Margin = new Padding(4, 0, 4, 0);
             lbl_input.Name = "lbl_input";
-            lbl_input.Size = new System.Drawing.Size(302, 15);
+            lbl_input.Size = new Size(579, 25);
             lbl_input.TabIndex = 5;
-            lbl_input.Text = "Input values, space separated. Separate decimals by dot:";
+            lbl_input.Text = "Input values, space separated. Input decimal values with dot (e.g 19.23):";
+            // 
+            // Stop_btn
+            // 
+            Stop_btn.Location = new Point(887, 254);
+            Stop_btn.Margin = new Padding(4, 5, 4, 5);
+            Stop_btn.Name = "Stop_btn";
+            Stop_btn.Size = new Size(147, 39);
+            Stop_btn.TabIndex = 6;
+            Stop_btn.Text = "Stop";
+            Stop_btn.UseVisualStyleBackColor = true;
+            Stop_btn.Click += Stop_btn_Click;
+            // 
+            // progressBar
+            // 
+            progressBar.Location = new Point(17, 684);
+            progressBar.Name = "progressBar";
+            progressBar.Size = new Size(1037, 34);
+            progressBar.TabIndex = 7;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(748, 438);
-            this.Controls.Add(lbl_input);
-            this.Controls.Add(lbl_value);
-            this.Controls.Add(ValueToSearch);
-            this.Controls.Add(Calculate);
-            this.Controls.Add(Output);
-            this.Controls.Add(Input);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
-            this.Margin = new System.Windows.Forms.Padding(2);
-            this.MaximizeBox = false;
-            this.Name = "Form1";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "SUBSET SUM CALC";
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1069, 730);
+            Controls.Add(progressBar);
+            Controls.Add(Stop_btn);
+            Controls.Add(lbl_input);
+            Controls.Add(lbl_value);
+            Controls.Add(ValueToSearch);
+            Controls.Add(Calculate_btn);
+            Controls.Add(Output);
+            Controls.Add(Input);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
+            Name = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "SUBSET SUM CALC";
+            Load += Form1_Load;
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private RichTextBox Input;
         private RichTextBox Output;
-        private Button Calculate;
+        private Button Calculate_btn;
         private TextBox ValueToSearch;
         private Label lbl_value;
         private Label lbl_input;
+        private Button Stop_btn;
+        private ProgressBar progressBar;
     }
 }

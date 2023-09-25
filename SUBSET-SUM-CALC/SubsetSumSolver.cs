@@ -7,7 +7,7 @@ namespace SUBSET_SUM_CALC
 {
     public class SubsetSumSolver
     {
-        public static List<string> Solve(string inputText, decimal targetSum)
+        public static void Solve(string inputText, decimal targetSum, RichTextBox output, CancellationToken cancellationToken, ProgressBar progressBar)
         {
             // Prune non-numeric characters
             inputText = Regex.Replace(inputText, @"[^\d.,-]+", " ").Trim();
@@ -21,40 +21,55 @@ namespace SUBSET_SUM_CALC
                 })
                 .ToList();
 
-            var solutions = FindSubsets(numbers, targetSum);
+            progressBar.Invoke(new Action(() => progressBar.Maximum = numbers.Count));
 
-            if (solutions.Count == 0)
+            FindSubsets(numbers, targetSum, new List<decimal>(), 0, output, cancellationToken, progressBar);
+
+            int lineCount = 0;
+            output.Invoke(new Action(() =>
             {
-                return new List<string> { "No combinations found." };
-            }
+                lineCount = output.Lines.Length;
+            }));
 
-            return solutions.Select(solution =>
-                string.Join(" + ", solution) + " = " + targetSum).ToList();
+            if (lineCount == 0) // Check if the RichTextBox is empty
+            {
+                output.Invoke(new Action(() =>
+                {
+                    output.AppendText("No combinations found.\n");
+                }));
+            }
         }
 
-        private static List<List<decimal>> FindSubsets(List<decimal> numbers, decimal target)
+
+
+
+        private static void FindSubsets(List<decimal> numbers, decimal target, List<decimal> currentSubset, int index, RichTextBox output, CancellationToken cancellationToken, ProgressBar progressBar)
         {
-            var solutions = new List<List<decimal>>();
-            int numOfSubsets = 1 << numbers.Count;
-
-            for (int subsetMask = 0; subsetMask < numOfSubsets; subsetMask++)
+            // Check for cancellation
+            cancellationToken.ThrowIfCancellationRequested();
+            if (index == numbers.Count)
             {
-                var currentSubset = new List<decimal>();
-                for (int j = 0; j < numbers.Count; j++)
+                if (Math.Abs(currentSubset.Sum() - target) < 0.0001M)
                 {
-                    if ((subsetMask & (1 << j)) != 0)
+                    // Update the RichTextBox with the found solution
+                    output.Invoke(new Action(() =>
                     {
-                        currentSubset.Add(numbers[j]);
-                    }
+                        output.AppendText(string.Join(" + ", currentSubset) + " = " + target + "\n");
+                    }));
                 }
-
-                if (currentSubset.Sum() == target)
-                {
-                    solutions.Add(currentSubset);
-                }
+                return;
             }
+            // Update the progress bar
+            progressBar.Invoke(new Action(() => progressBar.Value = index));
 
-            return solutions;
+            // Include the current number in the subset
+            currentSubset.Add(numbers[index]);
+            FindSubsets(numbers, target, currentSubset, index + 1, output, cancellationToken, progressBar);
+
+            // Exclude the current number from the subset
+            currentSubset.RemoveAt(currentSubset.Count - 1);
+            FindSubsets(numbers, target, currentSubset, index + 1, output, cancellationToken, progressBar);
+
         }
     }
 }
